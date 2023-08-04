@@ -21,7 +21,7 @@
             <span class="amount">R$ {{ (product.price * product.quantity).toFixed(2) }}</span>
           </div>
         </div>
-        <div class="grand-total"> Total do pedido: R$ 22.30</div>
+        <div class="grand-total"> Total do pedido: R$ {{ orderTotal() }}</div>
 
       </template>
 
@@ -41,7 +41,13 @@ export default {
   name: 'ShoppingBasket',
 
   methods: {
-
+    orderTotal() {
+      var total = 0;
+      this.productsInBag.forEach(item => {
+        total +=item.price * item.quantity;
+      });
+      return total.toFixed(2);
+    }
   },
   computed: mapState([
     'productsInBag'
